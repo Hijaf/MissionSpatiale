@@ -1,5 +1,5 @@
 	<a  id="menu" ng-click="afficherMenu()" href="">Menu</a>
-	<a  id="lancerM" ng-click="" href="">Vérifier la conception de la mission</a>
+	<a  id="lancerM" ng-click="validerM()" href="">Vérifier la conception</a>
 	<div id="blocMoved">
 		<nav id="navJeu">
 			<a href="" ng-click="showRu=!showRu; show=!show" class="btn4">Règles</a>
@@ -27,6 +27,7 @@
 					<li ng-show="element.carac.masse">Masse (Kg) : <span ng-bind="element.carac.masse"></span></li>
 					<li ng-show="element.carac.pelec">Puissance Elec. (W) : <span ng-bind="element.carac.pelec[typeM]"></span></li>
 					<li ng-show="element.carac.conso">Conso. Elec. (W) : <span ng-bind="element.carac.conso"></span></li>
+					<li ng-show="element.carac.ptsc">Point Science : <span ng-bind="element.carac.ptsc"></span></li>
 					<a href="" ng-click="acheterMat(element.id,element.type)" class="achat">Acheter</a>
 				</ul>
 			</article>
@@ -39,7 +40,7 @@
 		<a href="" ng-click="selectionnerListe('energies')" class="btn11">Energie</a>
 		<a href="" ng-click="selectionnerListe('structures')" class="btn8">Structures</a>
 		<a href="" ng-click="selectionnerListe('controles')"class="btn10">Contrôle Therm.</a>
-		<a href="" ng-click="selectionnerListe('commus')"class="btn9">Communications</a>
+		<a href="" ng-click="selectionnerListe('commus')"class="btn9">Commu.</a>
 		<a href="" ng-click="selectionnerListe('centres')"class="btn11">Centre de commandes</a>
 		<a href="" ng-click="selectionnerListe('attitudes')"class="btn8">Attitudes</a>
 		<a href="" ng-click="selectionnerListe('propulsions')"class="btn10">Propulsions</a>
@@ -48,19 +49,23 @@
 	</aside>
 	<div id="indicateur">
 		<div id="budget" class="indic">
-			<span class="label">Budget (M€)&nbsp;:  {{newBudget}}</span>
+			<span class="label">Budget actuel(M€)&nbsp;:  {{newBudget}}</span>
 			<span class="indMin">0</span>
 			<span class="indMax">{{budget}}</span>
 		</div>
 		<div id="energie" class="indic">
-			<span class="label">Conso. élec. (W)&nbsp;: {{newElec}}</span>
+			<span class="label">Conso. élec. actu. (W)&nbsp;: {{newElec}}</span>
 			<span class="indMin">0</span>
 			<span class="indMax">{{elec}}</span>
 		</div>
 		<div id="charge" class="indic">
-			<span class="label">Charge (Kg)&nbsp;: {{newCharge}}</span>
+			<span class="label">Charge actu. (Kg)&nbsp;: {{newCharge}}</span>
 			<span class="indMin">0</span>
 			<span class="indMax">{{charge}}</span>
+		</div>
+		<div id="ptsc">
+			<span class="label">Pt. Science&nbsp;: </span>
+			<span class="val">{{newPtsc}}</span>
 		</div>
 	</div>
 	
@@ -88,7 +93,8 @@
 						<li ng-show="article.carac.masse">Masse (Kg) : <span ng-bind="article.carac.masse"></span></li>
 						<li ng-show="article.carac.pelec">Puissance Elec. (W) : <span ng-bind="article.carac.pelec[typeM]"></span></li>
 						<li ng-show="article.carac.conso">Conso. Elec. (W) : <span ng-bind="article.carac.conso"></span></li>
-						<a href="" ng-click="vendreMat(article.id, article.type)" class="achat">Vendre</a>
+						<li ng-show="article.carac.ptsc">Point Science : <span ng-bind="article.carac.ptsc"></span></li>
+						<a href="" ng-click="vendreMat(article.id, article.type)" class="vente">Vendre</a>
 					</ul>
 				</article>
 			</div>	
@@ -125,5 +131,20 @@
 		<div id="objec" ng-show="showOb">
 			<a href="" id="close" ng-click="showOb=!showOb; show=!show">X</a>
 			<h1>Objectifs</h1>
+			<p> Vous retrouvez ici vos objectifs de conception en fonction du type de mission choisi</p>
+			<p> Aucun objectif défini pour le moment</p>
+		</div>
+	</div>
+	<div class="modal" ng-show="reussite">
+		<div id="reussi" ng-show="reussite">
+			<h1>Félicitations, vous avez réussi la conception de votre mission!</h1>
+			<p>Votre conception rapporte {{newPtsc}} points science</p>
+			<a href="#">Terminer la mission</a>
+		</div>
+	</div>
+	<div class="modal" ng-show="echec">
+		<div id="echoue" ng-show="echec">
+			<h1>Désolé, vous avez raté la conception de votre mission!</h1>
+			<a href="#">Terminer la mission</a><a href="" ng-click="echec=!echec">Reconcevoir la mission</a>
 		</div>
 	</div>

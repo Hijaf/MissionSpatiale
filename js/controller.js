@@ -1,5 +1,5 @@
 function objCtrl($scope){
-	$scope.mission = 'CubeSat';
+	$scope.mission = 'petite-astro';
 }
 
 function MatListCtrl($scope, $routeParams, $http) {
@@ -13,20 +13,30 @@ function MatListCtrl($scope, $routeParams, $http) {
 	$paramMission = $routeParams.typeM;
 	$http.get('js/contraintes.json').success(function(data) {
 		$scope.budget = recupBudget($paramMission, data.budget);
+		$scope.obligation = recupObli($paramMission, data.obligation);
 		$scope.newBudget = $scope.budget;
 	});
 	$http.get('js/mat.json').success(function(data) {
 		$scope.lanceurs = data.lanceurs;
 		$scope.projets = data.projets;
-		$scope.structures = data.structures;
 		$scope.segments = data.segments;
+		$scope.structures = data.structures;
+		$scope.controles = data.controles;
+		$scope.commus = data.commus;
+		$scope.centres = data.centres;
 		$scope.energies = data.energies;
+		$scope.attitudes = data.attitudes;
+		$scope.propulsions = data.propulsions;
+		$scope.instrus = data.instrus;
+		$scope.systemes = data.systemes;
 		$scope.typeM = recupTypeM($paramMission);
 		$listeChoix = 'lanceurs';
 		$scope.charge = 'N/A';
 		$scope.elec = 'N/A';
+		$scope.ptsc = 0;
 		$scope.newCharge = 0;
 		$scope.newElec = 0;
+		$scope.newPtsc = 0;
 		$scope.selectedList =   $scope[$listeChoix];
 	});
 	
@@ -53,13 +63,14 @@ function MatListCtrl($scope, $routeParams, $http) {
 					$scope.elec = $scope[$listeChoix][$i].carac.pelec[$scope.typeM];
 				}
 				// mise a jour des indicateurs en fonction du matériel acheté
-				$scope.newBudget = majBudget($scope[$listeChoix][$i],$scope.newBudget, 1);
-				$scope.newElec = majElec($scope[$listeChoix][$i],$scope.newElec,1);
-				$scope.newCharge = majCharge($scope[$listeChoix][$i],$scope.newCharge,1);
+				$scope.newBudget = majBudget($scope[$listeChoix][$i],$scope.newBudget, 1, $scope.budget);
+				$scope.newElec = majElec($scope[$listeChoix][$i],$scope.newElec,1, $scope.elec);
+				$scope.newCharge = majCharge($scope[$listeChoix][$i],$scope.newCharge,1, $scope.charge);
+				$scope.newPtsc = majPtsc($scope[$listeChoix][$i],$scope.newPtsc,1);
 				// met le matériel dans le panier
 				$tabPanier.push($scope[$listeChoix][$i]);
 				$scope.panier = $tabPanier;
-				$scope.test = true;
+				// $scope.test = true;
 			}
 		}
 	}
@@ -82,11 +93,37 @@ function MatListCtrl($scope, $routeParams, $http) {
 		$tabMatAchete[$index].state = false;
 		$tabMatAchete.splice($index,1);
 		// remet a jour les indicateurs en fonction du matériel vendu
-		$scope.newBudget = majBudget($tabPanier[$index],$scope.newBudget, 2);
-		$scope.newElec = majElec($tabPanier[$index],$scope.newElec,2);
-		$scope.newCharge = majCharge($tabPanier[$index],$scope.newCharge,2);
+		$scope.newBudget = majBudget($tabPanier[$index],$scope.newBudget, 2, $scope.budget);
+		$scope.newElec = majElec($tabPanier[$index],$scope.newElec,2, $scope.elec);
+		$scope.newCharge = majCharge($tabPanier[$index],$scope.newCharge,2, $scope.charge);
+		$scope.newPtsc = majPtsc($tabPanier[$index],$scope.newPtsc,2);
 		//supprime le matériel du panier
 		$tabPanier.splice($index,1);
 		$scope.panier = $tabPanier;
+	}
+
+	$scope.validerM = function(){
+		var $tabVerif=[], $bool=true;
+		for (var $i=0;$i<$tabPanier.length;$i++) {
+			$tabVerif.push($tabPanier[$i].id);
+		};
+		console.log($tabVerif);
+		if($scope.newBudget>0 && $scope.newCharge<=$scope.charge && $scope.newElec<=$scope.elec){
+			for(var $i=0;$i<$scope.obligation.length;$i++){
+				if($tabVerif.indexOf($scope.obligation[$i])==-1){
+					$bool=false;
+				}
+			}
+			if($bool){
+				$scope.reussite = true;
+			}
+			else{
+				$scope.echec = true;
+			}
+
+		}
+		else{
+			$scope.echec = true;
+		}
 	}
 }
