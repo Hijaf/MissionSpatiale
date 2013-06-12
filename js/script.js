@@ -27,6 +27,26 @@ var recupBudget = function($rParams, $jsonBudget){
 	return $budget;
 }
 
+var recupTypeM = function($rParams){
+	var $param, $type;
+	$param=$rParams.split('-');
+	$type = $param[1]; 
+	return $type;
+}
+
+var majBudget = function($oElement, $scopeBudget, cas){
+	var $newBudget;
+	switch(cas){
+		case 1:
+			$newBudget = $scopeBudget-$oElement.carac.cout;
+			break;
+		case 2:
+			$newBudget = $scopeBudget+$oElement.carac.cout;
+			break;
+	}
+	return $newBudget;
+}
+
 
 
 
