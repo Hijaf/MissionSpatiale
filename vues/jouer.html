@@ -1,0 +1,61 @@
+	<a  id="menu" ng-click="afficherMenu()" href="">Menu</a>
+	<a  id="lancerM" ng-click="" href="">Vérifier la conception de la mission</a>
+	<div id="blocMoved">
+		<nav id="navJeu">
+			<a href="#/regles" class="btn4">Règles</a>
+			<a href=""ng-click="showOb=!showOb" class="btn5">Objectifs</a>
+			<a href="" class="btn6" ng-click="showPa=!showPa">Panier</a>
+			<a href="#" class="btn7">Quitter</a>
+		</nav>
+		<div id="contentJeu">
+			<article class="typeMat" ng-repeat="element in selectedList">
+				<img src="{{element.img}}" alt="">
+				<div>
+					<h2>{{element.name}}</h2>
+					<p>
+						{{element.description}}
+					</p>
+					<p>
+						Remarques : 
+					</p>
+				</div>
+				<ul>
+					Caractéristiques:
+					<li>Coût : <span>{{element.carac.cout}}</span></li>
+					<li>Charge : <span>{{element.carac.charge}}</span></li>
+					<a href="" ng-click="" class="achat">Acheter</a>
+				</ul>
+			</article>
+		</div>
+	</div>
+	<aside id="onglets">
+		<a href="" ng-click="selectList('lanceurs')" class="btn8">Lanceurs</a>
+		<a href="" ng-click="selectList('segments')" class="btn9">Segment sol</a>
+		<a href="" class="btn10">Structures</a>
+		<a href="" class="btn11">Onglet</a>
+		<a href="" class="btn8">Onglet</a>
+		<a href="" class="btn9">Onglet</a>
+	</aside>
+	<div id="indicateur">
+		<div id="budget" class="indic">
+			<span class="label">Budget (M€)&nbsp;: </span>
+			<span class="indMin">0</span>
+			<span class="indMax">{{budget}}</span>
+		</div>
+		<div id="energie" class="indic">
+			<span class="label">Puissance électrique (W)&nbsp;: </span>
+			<span class="indMin">0</span>
+			<span class="indMax">N/A</span>
+		</div>
+		<div id="charge" class="indic">
+			<span class="label">Charge (Kg)&nbsp;: </span>
+			<span class="indMin">0</span>
+			<span class="indMax">N/A</span>
+		</div>
+	</div>
+	<a href="" id="close" ng-show="showPa" ng-click="showPa=!showPa">X</a>
+	<div class="modal" ng-show="showPa" ng-click="showPa=!showPa">
+		<div id="panier">
+			
+		</div>
+	</div>

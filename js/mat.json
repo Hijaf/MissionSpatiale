@@ -1,0 +1,29 @@
+{"lanceurs": [
+	{"name": "Lanceur léger",
+	"description": "Cette fusée, type Pegasus, lance des charges légères (missions scientifiques avec peu d’instruments) depuis un avion.",
+	"img": "./img/lanceurLeger.jpg",
+	"carac" : {"cout": "15 M€"}},
+	{"name": "Lanceur moyen",
+	"description": "Cette fusée, type Véga, lance des charges moyennes.",
+	"img": "./img/lanceurMoyen.jpg",
+	"carac" : {"cout": "40 M€"}},
+	{"name": "Lanceur lourd",
+	"description": "Cette fusée, type Ariane V, lance des charges lourdes (grosse mission avec beaucoup d’instruments scientifiques).",
+	"img": "./img/lanceurLourd.jpg",
+	"carac" : {"cout": "150 M€"}}
+	],
+"segments":[
+	{"name": "Segment sol simple",
+	"description": "Le segment sol rassemble les stations permettant de communiquer avec la mission, et le centre de contrôle qui surveille l’état des composants, prépare les commandes, traite et distribue les données reçues.",
+	"img": "./img/segSolSim.jpg",
+	"carac" : {"cout": "5 M€", "charge": "/"}},
+	{"name": "Segment sol observatoire",
+	"description": "Le segment sol « observatoire » possède des missions similaires à celles du segment sol simple, mais en plus il collecte les projets scientifiques et planifie les observations.",
+	"img": "./img/segSolObs.jpg",
+	"carac" : {"cout": "5 M€", "charge": "/"}},
+	{"name": "Segment sol atterrisseur",
+	"description": "Le segment sol « atterrisseur » possède des missions similaires à celles du segment sol simple, mais en plus il gère la délicate phase d’atterrissage.",
+	"img": "./img/segSolAtt.jpg",
+	"carac" : {"cout": "35 M€", "charge": "/"}}
+	]
+}
