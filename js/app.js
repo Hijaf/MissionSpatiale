@@ -1,5 +1,7 @@
-angular.module('route', []).
-	config(['$routeProvider', function($routeProvider) {
+angular.module('route', []).config(function($compileProvider){
+
+    $compileProvider.urlSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
+}).config(['$routeProvider', function($routeProvider) {
 		$routeProvider.
 			when('/', {templateUrl: 'vues/accueil.html'}).
 			when('/regles', {templateUrl: 'vues/regles.html'}).

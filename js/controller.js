@@ -25,6 +25,8 @@ function MatListCtrl($scope, $routeParams, $http) {
 		$listeChoix = 'lanceurs';
 		$scope.charge = 'N/A';
 		$scope.elec = 'N/A';
+		$scope.newCharge = 0;
+		$scope.newElec = 0;
 		$scope.selectedList =   $scope[$listeChoix];
 	});
 	
@@ -52,6 +54,8 @@ function MatListCtrl($scope, $routeParams, $http) {
 				}
 				// mise a jour des indicateurs en fonction du matériel acheté
 				$scope.newBudget = majBudget($scope[$listeChoix][$i],$scope.newBudget, 1);
+				$scope.newElec = majElec($scope[$listeChoix][$i],$scope.newElec,1);
+				$scope.newCharge = majCharge($scope[$listeChoix][$i],$scope.newCharge,1);
 				// met le matériel dans le panier
 				$tabPanier.push($scope[$listeChoix][$i]);
 				$scope.panier = $tabPanier;
@@ -79,6 +83,8 @@ function MatListCtrl($scope, $routeParams, $http) {
 		$tabMatAchete.splice($index,1);
 		// remet a jour les indicateurs en fonction du matériel vendu
 		$scope.newBudget = majBudget($tabPanier[$index],$scope.newBudget, 2);
+		$scope.newElec = majElec($tabPanier[$index],$scope.newElec,2);
+		$scope.newCharge = majCharge($tabPanier[$index],$scope.newCharge,2);
 		//supprime le matériel du panier
 		$tabPanier.splice($index,1);
 		$scope.panier = $tabPanier;

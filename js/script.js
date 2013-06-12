@@ -47,6 +47,54 @@ var majBudget = function($oElement, $scopeBudget, cas){
 	return $newBudget;
 }
 
+var majElec = function($oElement, $scopeElec, cas){
+	var $newElec;
+	switch(cas){
+		case 1:
+			if($oElement.carac.conso){
+				$newElec = $scopeElec+$oElement.carac.conso;
+			}
+			else{
+				$newElec = $scopeElec;
+			}
+			break;
+		case 2:
+			if($oElement.carac.conso){
+				$newElec = $scopeElec-$oElement.carac.conso;
+			}
+			else{
+				$newElec = $scopeElec;
+			}
+			break;
+	}
+	return $newElec;
+}
+
+var majCharge = function($oElement, $scopeCharge, cas){
+	var $newCharge;
+	switch(cas){
+		case 1:
+			if($oElement.carac.masse){
+				$newCharge = $scopeCharge+$oElement.carac.masse;
+			}
+			else{
+				$newCharge = $scopeCharge;
+			}
+			break;
+		case 2:
+			if($oElement.carac.masse){
+				console.log($scopeCharge);
+				console.log($oElement.id);
+				console.log($oElement.carac.masse);
+				$newCharge = $scopeCharge-$oElement.carac.masse;
+			}
+			else{
+				$newCharge = $scopeCharge;
+			}
+			break;
+	}
+	return $newCharge;
+}
 
 
 
